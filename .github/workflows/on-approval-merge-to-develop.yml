@@ -1,0 +1,47 @@
+name: Merge to develop
+
+on:
+  pull_request:
+    branches: [develop]
+    types:
+      - closed
+
+jobs:
+  call-build-and-test:
+    if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
+    uses: go-merkle/.github/workflows/build-and-test.yml@develop
+    secrets: inherit
+
+  call-publish:
+    if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
+    uses: go-merkle/.github/workflows/publish/publish.yml@develop
+    secrets: inherit
+
+  merge:
+    if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script or command
+        run: echo "Pull request #${{ github.event.pull_request.number }} was merged into ${GITHUB_REF}"
+
+#  auto-merge:
+#    if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
+#    runs-on: ubuntu-latest
+#    permissions:
+#      pull-requests: write
+#      contents: write
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Merge pull request
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#        run: |
+#          PR_NUMBER=$(jq --raw-output '.pull_request.number' <<< "${{ toJson(github.event) }}")
+#          BRANCH_NAME=$(jq --raw-output '.pull_request.head.ref' <<< "${{ toJson(github.event) }}")
+#          echo "Attempting to merge PR #${PR_NUMBER} from branch ${BRANCH_NAME}"
+#
+#          # Perform the merge
+#          gh pr merge $PR_NUMBER --repo "${{ github.repository }}" --squash --delete-branch
