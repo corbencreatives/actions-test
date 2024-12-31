@@ -9,12 +9,12 @@ on:
 jobs:
   call-build-and-test:
     if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
-    uses: go-merkle/.github/workflows/build-and-test.yml@develop
+    uses: ./.github/workflows/build-and-test.yml@develop
     secrets: inherit
 
   call-publish:
     if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
-    uses: go-merkle/.github/workflows/publish/publish.yml@develop
+    uses: ./.github/workflows/publish/publish.yml@develop
     secrets: inherit
 
   merge:
