@@ -15,6 +15,7 @@ jobs:
   call-publish:
     if: github.event_name != 'pull_request' || github.event.action == 'enqueued'
     permissions:
+      contents: read
       packages: write
     uses: corbencreatives/actions-test/.github/workflows/publish.yml@develop
     secrets: inherit
