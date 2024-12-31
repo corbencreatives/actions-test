@@ -14,7 +14,7 @@ jobs:
 
   call-publish:
     if: github.repository == 'corbencreatives/actions-test' && github.event.pull_request.merged == true
-    uses: corbencreatives/actions-test/.github/workflows/publish/publish.yml@develop
+    uses: corbencreatives/actions-test/.github/workflows/publish.yml@develop
     secrets: inherit
 
   merge:
