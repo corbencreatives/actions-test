@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy:
-    if: github.repository == 'threehook/go-merkle' && github.event.workflow_run.conclusion == 'success'
+    if: github.repository == 'corbencreatives/actions-test' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Install helm
