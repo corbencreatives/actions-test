@@ -1,33 +1,35 @@
 name: Merge to develop
 
 on:
-#  pull_request:
-#    branches: [develop]
+  pull_request:
+    branches: [develop]
   merge_group:
     branches: [develop]
 
 jobs:
   call-build-and-test:
-    if: github.event_name != 'pull_request' || github.event.action == 'enqueued'
+    if: ${{ github.event_name == 'merge_group' }}
+#    if: github.event_name != 'pull_request' || github.event.action == 'enqueued'
     uses: corbencreatives/actions-test/.github/workflows/build-and-test.yml@develop
     secrets: inherit
 
-  call-publish:
-    if: github.event_name != 'pull_request' || github.event.action == 'enqueued'
-    permissions:
-      contents: read
-      packages: write
-    uses: corbencreatives/actions-test/.github/workflows/publish.yml@develop
-    secrets: inherit
+#  call-publish:
+#    if: ${{ github.event_name == 'merge_group' }}
+##    if: github.event_name != 'pull_request' || github.event.action == 'enqueued'
+#    permissions:
+#      contents: read
+#      packages: write
+#    uses: corbencreatives/actions-test/.github/workflows/publish.yml@develop
+#    secrets: inherit
 
-#  merge:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Run a script or command
-#        run: echo "Pull request #${{ github.event.pull_request.number }} was merged into ${GITHUB_REF}"
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script or command
+        run: echo "Pull request #${{ github.event.pull_request.number }} was merged into ${GITHUB_REF}"
 
 #  auto-merge:
-#    if: github.repository == 'threehook/go-merkle' && github.event.pull_request.merged == true
+#    if: github.repository == 'corbencreatives/actions-test' && github.event.pull_request.merged == true
 #    runs-on: ubuntu-latest
 #    permissions:
 #      pull-requests: write
