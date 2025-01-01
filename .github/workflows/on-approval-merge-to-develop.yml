@@ -1,8 +1,6 @@
 name: Merge to develop
 
 on:
-  pull_request:
-    branches: [develop]
   merge_group:
     branches: [develop]
 
