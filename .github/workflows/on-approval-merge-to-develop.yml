@@ -7,10 +7,10 @@ on:
     branches: [develop]
 
 jobs:
-  call-build-and-test:
-    if: ${{ github.event_name == 'merge_group' }}
-    uses: corbencreatives/actions-test/.github/workflows/build-and-test.yml@develop
-    secrets: inherit
+#  call-build-and-test:
+#    if: ${{ github.event_name == 'merge_group' }}
+#    uses: corbencreatives/actions-test/.github/workflows/build-and-test.yml@develop
+#    secrets: inherit
 
 #  call-publish:
 #    if: ${{ github.event_name == 'merge_group' }}
