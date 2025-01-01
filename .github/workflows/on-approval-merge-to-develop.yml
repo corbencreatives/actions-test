@@ -7,8 +7,13 @@ on:
     branches: [develop]
 
 jobs:
-#  call-build-and-test:
-#    if: ${{ github.event_name == 'merge_group' }}
+  call-build-and-test:
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'merge_group' }}
+        steps:
+          - name: Run a script or command
+            run: echo "Pull request ready!"
+#            run: echo "Pull request #${{ github.event.pull_request.number }} was merged into ${GITHUB_REF}"
 #    uses: corbencreatives/actions-test/.github/workflows/build-and-test.yml@develop
 #    secrets: inherit
 
