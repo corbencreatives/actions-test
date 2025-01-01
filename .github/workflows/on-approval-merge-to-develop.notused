@@ -8,6 +8,8 @@ on:
 
 jobs:
   call-build-and-test:
+#    if: ${{ github.event_name == 'merge_group' }}
+    if: github.event.action == 'enqueued'
     runs-on: ubuntu-latest
     steps:
       - name: Run a script or command
