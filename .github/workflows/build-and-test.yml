@@ -5,10 +5,10 @@ name: 'Build and test develop'
 # E.g. when this 'Build and test develop' action is completed, the 'Publish' action is triggered.
 
 on:
-#  pull_request:
-#    branches: [develop, main]
-#    types: [opened, reopened]
-  workflow_call:
+  pull_request:
+    branches: [develop, main]
+    types: [opened, reopened]
+#  workflow_call:
 
 jobs:
   build-test:
