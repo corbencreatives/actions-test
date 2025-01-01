@@ -6,13 +6,10 @@ on:
 
 jobs:
   call-build-and-test:
-    if: ${{ github.event_name == 'merge_group' }}
     runs-on: ubuntu-latest
     steps:
       - name: Run a script or command
         run: echo "Pull request ready!"
-#    uses: corbencreatives/actions-test/.github/workflows/build-and-test.yml@develop
-#    secrets: inherit
 
 #  call-publish:
 #    if: ${{ github.event_name == 'merge_group' }}

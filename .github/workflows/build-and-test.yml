@@ -8,7 +8,6 @@ on:
   pull_request:
     branches: [develop, main]
     types: [opened, reopened]
-#  workflow_call:
 
 jobs:
   build-test:
