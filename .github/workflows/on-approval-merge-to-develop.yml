@@ -8,6 +8,7 @@ on:
 
 jobs:
   call-build-and-test:
+    if: ${{ github.event_name == 'merge_group' }}
     runs-on: ubuntu-latest
     steps:
       - name: Run a script or command
