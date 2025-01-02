@@ -2,9 +2,10 @@ package merkle
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/suite"
 	"github.com/threehook/go-merkle/merkle/algorithms"
-	"testing"
 )
 
 type MerkleTreeTestSuite struct {
@@ -21,8 +22,8 @@ type TestData struct {
 
 func (a *MerkleTreeTestSuite) TestGiveCorrectRootAfterCommit() {
 	data := setup()
-	mtree := FromLeaves[algorithms.AlgoSha256]([][]byte{}, algorithms.NewSha256())
-	mtree2 := FromLeaves[algorithms.AlgoSha256](data.LeafHashes, algorithms.NewSha256())
+	mtree := FromLeaves[*algorithms.AlgoSha256](&[][]byte{}, algorithms.NewSha256())
+	mtree2 := FromLeaves[*algorithms.AlgoSha256](&data.LeafHashes, algorithms.NewSha256())
 
 	fmt.Println(mtree)
 	fmt.Println(mtree2)

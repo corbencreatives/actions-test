@@ -16,7 +16,6 @@ func (p *UUID) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.NotFound(w, r)
-	return
 }
 
 func giveRandomUUID(w http.ResponseWriter, _ *http.Request) {
@@ -26,10 +25,10 @@ func giveRandomUUID(w http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Fprintf(w, fmt.Sprintf("%x", b))
+	_, _ = fmt.Fprintf(w, "%x", b)
 }
 
 func main() {
 	mux := &UUID{}
-	http.ListenAndServe(":8086", mux)
+	_ = http.ListenAndServe(":8086", mux)
 }

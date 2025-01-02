@@ -8,13 +8,13 @@ type AlgoSha256 struct {
 	size uint
 }
 
-func NewSha256() AlgoSha256 {
-	return AlgoSha256{
+func NewSha256() *AlgoSha256 {
+	return &AlgoSha256{
 		size: 0,
 	}
 }
 
-func (a AlgoSha256) Hash(data []byte) []byte {
+func (a *AlgoSha256) Hash(data []byte) []byte {
 	h := sha256.New()
 	h.Write(data)
 	hash := h.Sum(nil)
