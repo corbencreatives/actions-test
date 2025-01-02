@@ -39,9 +39,10 @@ jobs:
       # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.10.0
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
         with:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:latest
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:0.1.0
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:${{ env.SHORT_SHA }}
           labels: ${{ steps.meta.outputs.labels }}
