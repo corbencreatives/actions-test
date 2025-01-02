@@ -25,7 +25,7 @@ func giveRandomUUID(w http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	_, _ = fmt.Fprintf(w, fmt.Sprintf("%x", b))
+	_, _ = fmt.Fprintf(w, "%x", b)
 }
 
 func main() {
