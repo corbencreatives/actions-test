@@ -39,12 +39,13 @@ jobs:
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
       # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
       # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
-      - name: Build and push Docker image
+      - name: Set short GitHub SHA hash
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6.10.0
         with:
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:latest
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:${{ env.SHORT_SHA }}
-          labels: ${{ steps.meta.outputs.labels }}
+            push: true
+            tags: |
+              ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:latest
+              ${{ env.REGISTRY }}/${{ github.repository_owner }}/go-merkle:${{ env.SHORT_SHA }}
+            labels: ${{ steps.meta.outputs.labels }}
