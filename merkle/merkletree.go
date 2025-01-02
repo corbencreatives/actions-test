@@ -28,9 +28,9 @@ func NewHasher[T Hasher](hasher T) *MerkleTree[T] {
 	}
 }
 
-func FromLeaves[T Hasher](leaves [][]byte, hasher T) *MerkleTree[T] {
+func FromLeaves[T Hasher](leaves *[][]byte, hasher T) *MerkleTree[T] {
 	tree := NewHasher[T](hasher)
-	tree.append(leaves)
+	tree.append(*leaves)
 	tree.commit()
 
 	return tree
