@@ -13,6 +13,8 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read

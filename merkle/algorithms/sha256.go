@@ -14,7 +14,7 @@ func NewSha256() AlgoSha256 {
 	}
 }
 
-func (a *AlgoSha256) Hash(data []byte) []byte {
+func (a AlgoSha256) Hash(data []byte) []byte {
 	h := sha256.New()
 	h.Write(data)
 	hash := h.Sum(nil)
@@ -23,7 +23,7 @@ func (a *AlgoSha256) Hash(data []byte) []byte {
 	return hash
 }
 
-func (a *AlgoSha256) ConcatAndHash(left []byte, right []byte) []byte {
+func (a AlgoSha256) ConcatAndHash(left []byte, right []byte) []byte {
 	concatenated := make([]byte, len(left))
 	copy(concatenated, left)
 
@@ -37,6 +37,6 @@ func (a *AlgoSha256) ConcatAndHash(left []byte, right []byte) []byte {
 	}
 }
 
-func (a *AlgoSha256) HashSize() uint {
+func (a AlgoSha256) HashSize() uint {
 	return a.size
 }

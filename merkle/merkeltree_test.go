@@ -2,9 +2,10 @@ package merkle
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/suite"
 	"github.com/threehook/go-merkle/merkle/algorithms"
-	"testing"
 )
 
 type MerkleTreeTestSuite struct {
