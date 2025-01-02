@@ -28,9 +28,9 @@ func NewHasher[T Hasher](hasher T) *MerkleTree[T] {
 	}
 }
 
-func FromLeaves[T Hasher](leaves [][]byte, hasher T) *MerkleTree[T] {
+func FromLeaves[T Hasher](leaves *[][]byte, hasher T) *MerkleTree[T] {
 	tree := NewHasher[T](hasher)
-	tree.append(leaves)
+	tree.append(*leaves)
 	tree.commit()
 
 	return tree
@@ -106,7 +106,7 @@ func (mt *MerkleTree[T]) uncommittedDiff() *PartialTree {
 
 	// Building a partial tree with the changes that would be needed in the working tree
 	algo := &algorithms.AlgoSha256{}
-	tree, _ := newPartialTree(*algo).build(partialTreeTuples, uncommittedTreeDepth)
+	tree, _ := newPartialTree(algo).build(partialTreeTuples, uncommittedTreeDepth)
 
 	return tree
 
