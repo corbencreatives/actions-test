@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Terraform TST'
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
   terraform-plan:
     name: "Terraform Plan"
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
+#    if: github.event.workflow_run.conclusion == 'success'
     permissions:
       contents: read
       pull-requests: write
