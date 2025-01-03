@@ -4,11 +4,11 @@ variable "environment" {
   default = "test"
 }
 
-variable "arm_subscription_id" {
-  description = "Azure Subscription ID"
-  type = string
-  sensitive = true
-}
+# variable "arm_subscription_id" {
+#   description = "Azure Subscription ID"
+#   type = string
+#   sensitive = true
+# }
 
 # variable "kube_config" {
 #   type        = string
