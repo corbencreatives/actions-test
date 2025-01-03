@@ -14,8 +14,8 @@ env:
   TF_WORKSPACE: "actions-test"
   CONFIG_DIRECTORY: "./terraform"
   TF_VAR_arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  TF_VAR_arm_tenant_id: ${{ ARM_TENANT_ID }}
-  TF_VAR_arm_client_id: ${{ ARM_CLIENT_ID }}
+  TF_VAR_arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+  TF_VAR_arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
 
 jobs:
   terraform-plan:
