@@ -1,4 +1,4 @@
-name: Build and test main
+name: 'Build and test main'
 
 # This GitHub Action is the initiator of a complete merge to main.
 # In this particlar action the app is build and tested, but continues with actions that make use of trigering events.concurrency.
