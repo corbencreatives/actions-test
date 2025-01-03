@@ -21,19 +21,19 @@ resource "github_membership" "membership_threehook" {
   username = "threehook"
 }
 
-provider "kubernetes" {
-  config_path = var.kube_config
-
-  experiments {
-    manifest_resource = true
-  }
-}
-
-provider "helm" {
-  kubernetes {
-    config_path = var.kube_config
-  }
-}
+# provider "kubernetes" {
+#   config_path = var.kube_config
+#
+#   experiments {
+#     manifest_resource = true
+#   }
+# }
+#
+# provider "helm" {
+#   kubernetes {
+#     config_path = var.kube_config
+#   }
+# }
 
 provider "azurerm" {
   features {}
