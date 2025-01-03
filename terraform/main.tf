@@ -35,10 +35,10 @@ resource "github_membership" "membership_threehook" {
 #   }
 # }
 
-provider "azurerm" {
-  features {}
-  subscription_id = var.arm_subscription_id
-}
+# provider "azurerm" {
+#   features {}
+#   subscription_id = var.arm_subscription_id
+# }
 
 resource "azurerm_resource_group" "rg" {
   name     = "rg-cicd-apps"
