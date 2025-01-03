@@ -1,6 +1,3 @@
-variable "environment" {
-  description = "Name of the environment"
-}
 
 terraform {
   required_providers {
@@ -24,24 +21,19 @@ resource "github_membership" "membership_threehook" {
   username = "threehook"
 }
 
-variable "kube_config" {
-  type        = string
-  description = "The kubernetes config"
-}
-
-provider "kubernetes" {
-  config_path = var.kube_config
-
-  experiments {
-    manifest_resource = true
-  }
-}
-
-provider "helm" {
-  kubernetes {
-    config_path = var.kube_config
-  }
-}
+# provider "kubernetes" {
+#   config_path = var.kube_config
+#
+#   experiments {
+#     manifest_resource = true
+#   }
+# }
+#
+# provider "helm" {
+#   kubernetes {
+#     config_path = var.kube_config
+#   }
+# }
 
 provider "azurerm" {
   features {}
