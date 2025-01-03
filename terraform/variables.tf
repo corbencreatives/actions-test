@@ -10,11 +10,17 @@ variable "arm_subscription_id" {
   sensitive = true
 }
 
-# variable "arm_tenant_id" {
-#   description = "Azure Tenant ID"
-#   type = string
-#   sensitive = true
-# }
+variable "arm_tenant_id" {
+  description = "Azure Tenant ID"
+  type = string
+  sensitive = true
+}
+
+variable "arm_client_id" {
+  description = "Azure Client ID"
+  type = string
+  sensitive = true
+}
 
 # variable "kube_config" {
 #   type        = string
