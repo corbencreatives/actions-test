@@ -6,7 +6,6 @@
 terraform {
   cloud {
     organization = "corbencreatives"
-
     workspaces {
       name = "actions-test"
     }
