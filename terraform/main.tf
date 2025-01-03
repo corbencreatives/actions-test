@@ -16,12 +16,6 @@ terraform {
 # Configure the GitHub Provider
 provider "github" {}
 
-# Add a user to the organization
-# resource "github_membership" "membership_threehook" {
-#   username = "threehook"
-# }
-
-
 
 # provider "kubernetes" {
 #   config_path = var.kube_config
@@ -39,7 +33,7 @@ provider "github" {}
 
 provider "azurerm" {
   features {}
-  subscription_id = "a6ce566c-53c3-4548-ac59-63c982e8ab78"
+  subscription_id = var.arm_subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {
