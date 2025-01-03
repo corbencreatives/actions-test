@@ -18,6 +18,6 @@ jobs:
       - name: terraform destroy
         uses: dflook/terraform-destroy@v1
         with:
-          path: ${{ CONFIG_DIRECTORY }}
-          workspace: ${{ TF_WORKSPACE }}
+          path: ${{ env.CONFIG_DIRECTORY }}
+          workspace: ${{ env.TF_WORKSPACE }}
 
