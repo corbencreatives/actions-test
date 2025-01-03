@@ -14,6 +14,8 @@ env:
   TF_WORKSPACE: "actions-test"
   CONFIG_DIRECTORY: "./terraform"
   TF_VAR_arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_arm_tenant_id: ${{ ARM_TENANT_ID }}
+  TF_VAR_arm_client_id: ${{ ARM_CLIENT_ID }}
 
 jobs:
   terraform-plan:
@@ -50,14 +52,14 @@ jobs:
         with:
           plan: ${{ steps.plan-run.outputs.plan_id }}
 
-      - name: Show Plan Output
+      - name: Create Plan Output
         uses: actions/github-script@v7.0.1
         id: show-output
 #        with:
 #          github-token: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const output = `#### HCP Terraform Plan Output
+            return `#### HCP Terraform Plan Output
                \`\`\`\n
                Plan: ${{ steps.plan-output.outputs.add }} to add, ${{ steps.plan-output.outputs.change }} to change, ${{ steps.plan-output.outputs.destroy }} to destroy.
                \`\`\`
