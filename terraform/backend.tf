@@ -8,7 +8,7 @@ terraform {
     organization = "corbencreatives"
 
     workspaces {
-      name = "go-merkle"
+      name = "actions-test"
     }
   }
 }
