@@ -33,7 +33,7 @@ provider "github" {}
 
 provider "azurerm" {
   features {}
-  subscription_id = local.subscription_id
+  subscription_id = var.arm_subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -44,5 +44,4 @@ resource "azurerm_resource_group" "rg" {
 locals {
   env      = var.environment
   location = "West Europe"
-  subscription_id = var.arm_subscription_id
 }
