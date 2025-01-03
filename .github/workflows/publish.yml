@@ -47,5 +47,5 @@ jobs:
             push: true
             tags: |
               ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-              ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ envIMAGE_NAME }}:${{ env.SHORT_SHA }}
+              ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
             labels: ${{ steps.meta.outputs.labels }}
