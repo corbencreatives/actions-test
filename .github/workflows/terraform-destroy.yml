@@ -6,6 +6,7 @@ on:
 env:
   TF_WORKSPACE: "actions-test"
   CONFIG_DIRECTORY: "./terraform"
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
 
 jobs:
   destroy-workspace:
