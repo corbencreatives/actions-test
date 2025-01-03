@@ -1,6 +1,3 @@
-variable "environment" {
-  description = "Name of the environment"
-}
 
 terraform {
   required_providers {
@@ -22,11 +19,6 @@ provider "github" {}
 # Add a user to the organization
 resource "github_membership" "membership_threehook" {
   username = "threehook"
-}
-
-variable "kube_config" {
-  type        = string
-  description = "The kubernetes config"
 }
 
 provider "kubernetes" {
