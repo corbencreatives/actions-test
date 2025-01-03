@@ -17,9 +17,11 @@ terraform {
 provider "github" {}
 
 # Add a user to the organization
-resource "github_membership" "membership_threehook" {
-  username = "threehook"
-}
+# resource "github_membership" "membership_threehook" {
+#   username = "threehook"
+# }
+
+
 
 # provider "kubernetes" {
 #   config_path = var.kube_config
