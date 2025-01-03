@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Terraform Login
+        run: terraform login
+
       - name: terraform destroy
         uses: dflook/terraform-destroy@v1
         with:
