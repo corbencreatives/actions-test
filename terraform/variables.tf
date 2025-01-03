@@ -7,7 +7,7 @@ variable "environment" {
 variable "arm_subscription_id" {
   description = "Azure Subscription ID"
   type = string
-#   sensitive = true
+  sensitive = true
 }
 
 # variable "kube_config" {
