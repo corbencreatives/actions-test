@@ -5,10 +5,10 @@ on:
 
 env:
   TF_CLOUD_ORGANIZATION: "corbencreatives"
-#  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_TOKEN_app_terraform_io: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "actions-test"
   CONFIG_DIRECTORY: "./terraform"
+  TF_TOKEN_app_terraform_io: "${{ secrets.TF_API_TOKEN }}"
+  TF_VAR_arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
 jobs:
   destroy-workspace:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: terraform destroy
-        uses: dflook/terraform-destroy@v1
+        uses: dflook/terraform-destroy@v1.45.0
         with:
           path: ${{ env.CONFIG_DIRECTORY }}
           workspace: ${{ env.TF_WORKSPACE }}
