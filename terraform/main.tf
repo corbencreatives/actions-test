@@ -37,7 +37,7 @@ resource "github_membership" "membership_threehook" {
 
 provider "azurerm" {
   features {}
-  subscription_id = "a6ce566c-53c3-4548-ac59-63c982e8ab78"
+  subscription_id = "00000000-0000-0000-0000-000000000000"
 }
 
 resource "azurerm_resource_group" "rg" {
