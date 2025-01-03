@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
 
 env:
+  TF_CLOUD_ORGANIZATION: "corbencreatives"
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "actions-test"
   CONFIG_DIRECTORY: "./terraform"
-  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
 
 jobs:
   destroy-workspace:
@@ -15,9 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Terraform Login
-        run: terraform login
 
       - name: terraform destroy
         uses: dflook/terraform-destroy@v1
