@@ -5,7 +5,7 @@ on:
     branches: [develop, main]
     types: [opened, reopened]
   merge_group:
-    branches: [develop]
+    branches: [develop, main]
 
 env:
   GO_VERSION: 1.23
@@ -18,8 +18,8 @@ permissions:
 
 jobs:
   build-test:
+    if: ${{ github.event_name == 'pull_request' }} # only run job if workflow initiated by a pull request event
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -33,6 +33,7 @@ jobs:
         run: go test -v ./...
 
   golangci-lint:
+    if: ${{ github.event_name == 'pull_request' }} # only run job if workflow initiated by a pull request event
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
