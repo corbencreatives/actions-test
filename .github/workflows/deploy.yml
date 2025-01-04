@@ -14,7 +14,7 @@ jobs:
   deploy:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    environment: test
+#    environment: test
     steps:
       - name: Install helm
         id: install_helm
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Package helm chart
-        run: helm package ./chart
+        run: helm package chart
 
       - name: Login to registry
         run: helm registry login ${{ env.REGISTRY }}/${{ github.repository_owner }} -u ${{ github.repository_owner }} -p ${{ secrets.REGISTRY_TOKEN }}
