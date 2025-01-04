@@ -10,8 +10,8 @@ on:
   pull_request:
     types: [closed]
     paths:
-      - terraform/**
-      - .github/workflows/**
+      - 'terraform/**'
+      - '.github/workflows/**'
 
 #on:
 #  pull_request:
