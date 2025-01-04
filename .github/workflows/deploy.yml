@@ -1,9 +1,9 @@
-name: 'Deploy'
+name: Deploy
 
 on:
   workflow_run:
-    workflows: ['Terraform TST']
-    branches: [develop, main]
+    workflows: [Terraform TST]
+#    branches: [develop, main]
     types: [completed]
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
@@ -14,6 +14,7 @@ jobs:
   deploy:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - name: Install helm
         id: install_helm
