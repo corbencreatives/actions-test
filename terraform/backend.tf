@@ -22,9 +22,15 @@ resource "azurerm_kubernetes_cluster" "cl-cicd" {
     name       = "default"
     node_count = "2"
     vm_size    = "standard_d2_v2"
+    upgrade_settings {
+      drain_timeout_in_minutes = 0
+      max_surge = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
   identity {
     type = "SystemAssigned"
   }
 }
+
