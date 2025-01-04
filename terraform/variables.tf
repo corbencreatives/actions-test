@@ -22,6 +22,18 @@ variable "arm_client_id" {
   sensitive = true
 }
 
+# variable "arm_client_secret" {
+#   description = "Azure Client Secret"
+#   type = string
+#   sensitive = true
+# }
+
+variable "ARM_CLIENT_SECRET" {
+  description = "Azure Client Secret"
+  type = string
+  sensitive = true
+}
+
 # variable "kube_config" {
 #   type        = string
 #   description = "The kubernetes config"
