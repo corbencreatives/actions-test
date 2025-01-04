@@ -2,7 +2,7 @@ name: 'Deploy'
 
 on:
   workflow_run:
-    workflows: ['Terraform TST']
+    workflows: [Terraform TST]
     branches: [develop, main]
     types: [completed]
 
