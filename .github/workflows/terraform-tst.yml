@@ -1,12 +1,15 @@
 name: 'Terraform TST'
 
-on:
-  workflow_dispatch:
 #on:
 #  workflow_run:
 #    workflows: [Publish]
 #    branches: [develop, main]
 #    types: [completed]
+
+on:
+  pull_request:
+    branches: [develop, main] # TODO: Check if publish must be done again/separately for main when releasing. Maybe for a release version.
+    types: [closed]
 
 env:
   TF_CLOUD_ORGANIZATION: "corbencreatives"
@@ -23,6 +26,7 @@ jobs:
     name: "Terraform Plan"
     runs-on: ubuntu-latest
 #    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.pull_request.merged == true
     permissions:
       contents: read
       pull-requests: write
