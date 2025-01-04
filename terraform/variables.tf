@@ -10,23 +10,17 @@ variable "arm_subscription_id" {
   sensitive = true
 }
 
-variable "arm_tenant_id" {
+variable "ARM_TENANT_ID" {
   description = "Azure Tenant ID"
   type = string
   sensitive = true
 }
 
-variable "arm_client_id" {
+variable "ARM_CLIENT_ID" {
   description = "Azure Client ID"
   type = string
   sensitive = true
 }
-
-# variable "arm_client_secret" {
-#   description = "Azure Client Secret"
-#   type = string
-#   sensitive = true
-# }
 
 variable "ARM_CLIENT_SECRET" {
   description = "Azure Client Secret"
