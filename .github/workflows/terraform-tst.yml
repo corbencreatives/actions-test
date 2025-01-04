@@ -8,8 +8,15 @@ name: 'Terraform TST'
 
 on:
   pull_request:
-    branches: [develop, main] # TODO: Check if publish must be done again/separately for main when releasing. Maybe for a release version.
     types: [closed]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/**'
+
+#on:
+#  pull_request:
+#    branches: [develop, main] # TODO: Check if publish must be done again/separately for main when releasing. Maybe for a release version.
+#    types: [closed]
 
 env:
   TF_CLOUD_ORGANIZATION: "corbencreatives"
