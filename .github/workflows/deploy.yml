@@ -2,7 +2,7 @@ name: 'Deploy'
 
 on:
   workflow_run:
-    workflows: [Terraform Apply]
+    workflows: ['Terraform Apply']
     branches: [develop, main]
     types: [completed]
 
@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy:
-    if: github.repository == 'corbencreatives/actions-test' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Install helm
