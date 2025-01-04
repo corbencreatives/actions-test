@@ -33,7 +33,7 @@ provider "github" {}
 
 provider "azurerm" {
   features {}
-  subscription_id = var.arm_subscription_id
+  subscription_id = var.ARM_SUBSCRIPTION_ID
 #   tenant_id = var.arm_tenant_id
 #   client_id = var.arm_client_id
 #   client_secret = var.arm_client_secret

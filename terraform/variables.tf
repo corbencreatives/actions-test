@@ -4,7 +4,7 @@ variable "environment" {
   default = "test"
 }
 
-variable "arm_subscription_id" {
+variable "ARM_SUBSCRIPTION_ID" {
   description = "Azure Subscription ID"
   type = string
   sensitive = true
