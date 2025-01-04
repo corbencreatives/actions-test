@@ -1,4 +1,4 @@
-name: Terraform TST
+name: 'Terraform TST'
 
 #on:
 #  workflow_run:
