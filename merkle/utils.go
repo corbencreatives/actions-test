@@ -15,7 +15,7 @@ func Unzip[T uint, U []byte](nt []tuple.T2[T, U]) ([]T, []U) {
 	return indices, hashes
 }
 
-// Pop removes the last item of a NodeTuple slice (if exists) and returns it
+// Pop removes the last item of a NodeTuple slice (if exists) and returns it.
 func Pop[T []NodeTuple](s []T) (T, []T) {
 	last := []NodeTuple{}
 	if len(s) > 0 {
