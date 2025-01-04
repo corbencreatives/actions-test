@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    environment: test
+#    environment: test
     steps:
       - name: Checkout
         uses: actions/checkout@v3
