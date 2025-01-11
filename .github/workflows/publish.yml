@@ -2,7 +2,7 @@ name: 'Publish'
 
 on:
   pull_request:
-#    branches: [develop, main] # TODO: Check if publish must be done again/separately for main when releasing. Maybe for a release version.
+    branches: [develop, main]
     types: [closed]
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
