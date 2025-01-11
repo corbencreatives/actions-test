@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/threehook/go-merkle
+  repository: ghcr.io/corbencreatives/go-merkle
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
 #  tag: ""
