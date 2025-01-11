@@ -3,7 +3,7 @@ name: 'Deploy'
 on:
   workflow_run:
     workflows: [Publish]
-    branches: [develop, main]
+#    branches: [develop, main]
     types: [completed]
 
 env:
