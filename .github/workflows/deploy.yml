@@ -1,50 +1,56 @@
 name: 'Deploy'
 
-on:
-  workflow_run:
-    workflows: ['Publish']
-#    branches: [develop, main]
-    types: [completed]
+on: ['deployment']
+
+#  workflow_run:
+#    workflows: ['Publish']
+##    branches: [develop, main]
+#    types: [completed]
 
 env:
   REGISTRY: ghcr.io
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#    environment: test
+  deployment:
+    runs-on: 'ubuntu-latest'
     steps:
-      - name: Install helm
-        id: install_helm
-        uses: azure/setup-helm@v3
-        with:
-          # version: '<version>' # default is latest (stable)
-          token: ${{ secrets.REGISTRY_TOKEN }}
-
-      - name: Checkout source code
-        uses: actions/checkout@v4
-
-      - name: Package helm chart
-        run: helm package chart
-
-      - name: Login to registry
-        run: helm registry login ${{ env.REGISTRY }}/${{ github.repository_owner }} -u ${{ github.repository_owner }} -p ${{ secrets.REGISTRY_TOKEN }}
-
-      - name: Push chart to registry
-        run: helm push ./go-merkle-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
-
-      - name: Install kubectl
-        id: install_kubectl
-        uses: azure/setup-kubectl@v4.0.0
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+#  deploy:
+#    runs-on: ubuntu-latest
+##    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+##    environment: test
+#    steps:
+#      - name: Install helm
+#        id: install_helm
+#        uses: azure/setup-helm@v3
 #        with:
-#          version: 'v4.0.0' # default is latest stable
-
-      - name: Create kube config
-        uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+#          # version: '<version>' # default is latest (stable)
+#          token: ${{ secrets.REGISTRY_TOKEN }}
+#
+#      - name: Checkout source code
+#        uses: actions/checkout@v4
+#
+#      - name: Package helm chart
+#        run: helm package chart
+#
+#      - name: Login to registry
+#        run: helm registry login ${{ env.REGISTRY }}/${{ github.repository_owner }} -u ${{ github.repository_owner }} -p ${{ secrets.REGISTRY_TOKEN }}
+#
+#      - name: Push chart to registry
+#        run: helm push ./go-merkle-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
+#
+#      - name: Install kubectl
+#        id: install_kubectl
+#        uses: azure/setup-kubectl@v4.0.0
+##        with:
+##          version: 'v4.0.0' # default is latest stable
+#
+#      - name: Create kube config
+#        uses: azure/k8s-set-context@v3
+#        with:
+#          method: kubeconfig
+#          kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
 #      - name: Deploy to k8s
 #        run: |
@@ -53,21 +59,11 @@ jobs:
       - name: Deploy to k8s
         # Parameters are pulled directly from the GitHub deployment event so the
         # configuration for the job here is very minimal.
-#        uses: 'deliverybot/helm@v1.5.0'
-#        with:
-#          token: '${{ github.token }}'
-#          secrets: '${{ toJSON(secrets) }}'
-#          version: '${{ github.sha }}'
-#          chart: 'app'
-#        env:
-#          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
-        uses: 'deliverybot/helm@v1'
+        uses: 'deliverybot/helm@v1.5.0'
         with:
-          release: 'nginx'
-          helm: 'helm3'
           namespace: 'cicd'
           chart: 'app'
-          version: 'latest'
+          version: '${{ github.sha }}'
           token: '${{ github.token }}'
         env:
           KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
