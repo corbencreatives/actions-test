@@ -10,10 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets:
-  - name: registrypullsecret
-nameOverride: ""
-fullnameOverride: ""
+#imagePullSecrets:
+#  - name: registrypullsecret
+#nameOverride: ""
+#fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
