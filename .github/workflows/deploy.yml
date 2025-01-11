@@ -20,7 +20,7 @@ jobs:
         uses: azure/setup-helm@v3
         with:
           # version: '<version>' # default is latest (stable)
-          token: ${{ secrets.REGISTRY_TOKEN }} # only needed if version is 'latest'
+          token: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
         run: helm registry login ${{ env.REGISTRY }}/${{ github.repository_owner }} -u ${{ github.repository_owner }} -p ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Push chart to registry
-        run: helm push ./go-merkle-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
+        run: helm push ./actions-test-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
 
       - name: Install kubectl
         id: install_kubectl
@@ -48,6 +48,6 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install corbencreatives/actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle \
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test \
           --version latest --kube-token ${{ secrets.DELIVERYBOT_TOKEN }} --kube-context cicdcluster \
           --namespace cicd --create-namespace --insecure-skip-tls-verify
