@@ -48,6 +48,6 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle \
-          --version 0.1.0 --kube-token ${{ secrets.DELIVERYBOT_TOKEN }} --kube-context cicdcluster \
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle \
+          --version latest --kube-token ${{ secrets.DELIVERYBOT_TOKEN }} --kube-context cicdcluster \
           --namespace cicd --create-namespace --insecure-skip-tls-verify
