@@ -64,8 +64,10 @@ jobs:
         uses: 'deliverybot/helm@v1'
         with:
           release: 'nginx'
+          helm: 'helm3'
           namespace: 'cicd'
           chart: 'app'
+          version: 'latest'
           token: '${{ github.token }}'
         env:
           KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
