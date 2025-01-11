@@ -46,6 +46,18 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
+#      - name: Deploy to k8s
+#        run: |
+#          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+
       - name: Deploy to k8s
-        run: |
-          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+        # Parameters are pulled directly from the GitHub deployment event so the
+        # configuration for the job here is very minimal.
+        uses: 'deliverybot/helm@v1.5.0'
+        with:
+          token: '${{ github.token }}'
+          secrets: '${{ toJSON(secrets) }}'
+          version: '${{ github.sha }}'
+          chart: 'app'
+        env:
+          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
