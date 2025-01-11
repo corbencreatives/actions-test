@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/corbencreatives/actions-test
+  repository: ghcr.io/corbencreatives/corbencreatives/actions-test
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "44ac654c"
 
 imagePullSecrets:
   - name: registrypullsecret
