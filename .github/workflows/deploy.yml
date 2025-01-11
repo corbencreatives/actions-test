@@ -53,11 +53,19 @@ jobs:
       - name: Deploy to k8s
         # Parameters are pulled directly from the GitHub deployment event so the
         # configuration for the job here is very minimal.
-        uses: 'deliverybot/helm@v1.5.0'
+#        uses: 'deliverybot/helm@v1.5.0'
+#        with:
+#          token: '${{ github.token }}'
+#          secrets: '${{ toJSON(secrets) }}'
+#          version: '${{ github.sha }}'
+#          chart: 'app'
+#        env:
+#          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
+        uses: 'deliverybot/helm@v1'
         with:
-          token: '${{ github.token }}'
-          secrets: '${{ toJSON(secrets) }}'
-          version: '${{ github.sha }}'
+          release: 'nginx'
+          namespace: 'cicd'
           chart: 'app'
+          token: '${{ github.token }}'
         env:
-          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
+          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
