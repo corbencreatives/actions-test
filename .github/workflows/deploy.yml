@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-token ${{ secrets.DELIVERYBOT_TOKEN }} --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-token ${{ secrets.REGISTRY_TOKEN }} --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
 
 #      - name: Deploy to k8s
 #        # Parameters are pulled directly from the GitHub deployment event so the
