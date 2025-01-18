@@ -52,19 +52,23 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
-#      - name: Deploy to k8s
-#        run: |
-#          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kubeconfig ${{ secrets.KUBE_CONFIG }} --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+      # Set up the kubeconfig from the secret
+      - name: Set up kubeconfig
+        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
 
       - name: Deploy to k8s
-        # Parameters are pulled directly from the GitHub deployment event so the
-        # configuration for the job here is very minimal.
-        uses: 'deliverybot/helm@v1'
-        with:
-          release: 'nginx'
-          namespace: 'cicd'
-          chart: 'app'
-          version: '${{ github.sha }}'
-          token: '${{ github.token }}'
-        env:
-          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
+        run: |
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kubeconfig $HOME/.kube/config --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+
+#      - name: Deploy to k8s
+#        # Parameters are pulled directly from the GitHub deployment event so the
+#        # configuration for the job here is very minimal.
+#        uses: 'deliverybot/helm@v1'
+#        with:
+#          release: 'nginx'
+#          namespace: 'cicd'
+#          chart: 'app'
+#          version: '${{ github.sha }}'
+#          token: '${{ github.token }}'
+#        env:
+#          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
