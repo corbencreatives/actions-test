@@ -15,7 +15,6 @@ jobs:
 #    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Install helm
-#        id: install_helm
         uses: azure/setup-helm@v3
         with:
           # version: '<version>' # default is latest (stable)
@@ -40,35 +39,35 @@ jobs:
       - name: Push chart to registry
         run: helm push ./actions-test-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
 
-      - name: Install kubectl
-#        id: install_kubectl
-        uses: azure/setup-kubectl@v4.0.0
+#      - name: Install kubectl
+#        uses: azure/setup-kubectl@v4.0.0
+##        with:
+##          version: 'v4.0.0' # default is latest stable
+#
+#      - name: Create kube config
+#        uses: azure/k8s-set-context@v3
 #        with:
-#          version: 'v4.0.0' # default is latest stable
+#          method: kubeconfig
+#          kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
-      - name: Create kube config
-        uses: azure/k8s-set-context@v3
+#      # Set up the kubeconfig from the secret
+#      - name: Set up kubeconfig
+#        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ./kube_config
+
+      # Log in to Azure using OIDC
+      - name: Azure Login
+        uses: azure/login@v2
         with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
-      # Set up the kubeconfig from the secret
-      - name: Set up kubeconfig
-        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ./kube_config
+      # Configure kubectl for AKS
+      - name: Set up kubectl for AKS
+        run: |
+          az aks get-credentials --resource-group rg-cicd-apps --name cicdcluster
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kubeconfig ./kube_config --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --namespace cicd --create-namespace --insecure-skip-tls-verify
 
-#      - name: Deploy to k8s
-#        # Parameters are pulled directly from the GitHub deployment event so the
-#        # configuration for the job here is very minimal.
-#        uses: 'deliverybot/helm@v1'
-#        with:
-#          release: 'nginx'
-#          namespace: 'cicd'
-#          chart: 'app'
-#          version: '${{ github.sha }}'
-#          token: '${{ github.token }}'
-#        env:
-#          KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
