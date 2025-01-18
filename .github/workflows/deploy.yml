@@ -59,8 +59,9 @@ jobs:
       - name: Deploy to k8s
         # Parameters are pulled directly from the GitHub deployment event so the
         # configuration for the job here is very minimal.
-        uses: 'deliverybot/helm@v1.5.0'
+        uses: 'deliverybot/helm@v1'
         with:
+          release: 'nginx'
           namespace: 'cicd'
           chart: 'app'
           version: '${{ github.sha }}'
