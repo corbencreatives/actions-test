@@ -54,6 +54,14 @@ jobs:
 #      - name: Set up kubeconfig
 #        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ./kube_config
 
+      # Log in to Azure using OIDC
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
       # Configure kubectl for AKS
       - name: Set up kubectl for AKS
         run: |
