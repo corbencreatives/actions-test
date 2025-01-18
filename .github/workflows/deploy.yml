@@ -54,11 +54,11 @@ jobs:
 
       # Set up the kubeconfig from the secret
       - name: Set up kubeconfig
-        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ./kube_config
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kubeconfig $HOME/.kube/config --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kubeconfig ./kube_config --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
 
 #      - name: Deploy to k8s
 #        # Parameters are pulled directly from the GitHub deployment event so the
