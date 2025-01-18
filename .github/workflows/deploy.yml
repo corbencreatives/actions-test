@@ -13,10 +13,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 #    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#    environment: test
     steps:
       - name: Install helm
-        id: install_helm
+#        id: install_helm
         uses: azure/setup-helm@v3
         with:
           # version: '<version>' # default is latest (stable)
@@ -42,7 +41,7 @@ jobs:
         run: helm push ./go-merkle-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
 
       - name: Install kubectl
-        id: install_kubectl
+#        id: install_kubectl
         uses: azure/setup-kubectl@v4.0.0
 #        with:
 #          version: 'v4.0.0' # default is latest stable
@@ -55,16 +54,5 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install go-merkle oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-token ${{ secrets.GH_ACTIONS_TOKEN }} --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
 
-#      - name: Deploy to k8s
-#        # Parameters are pulled directly from the GitHub deployment event so the
-#        # configuration for the job here is very minimal.
-#        uses: 'deliverybot/helm@v1.5.0'
-#        with:
-#          namespace: 'cicd'
-#          chart: 'app'
-#          version: '${{ github.sha }}'
-#          token: '${{ github.token }}'
-#        env:
-#          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
