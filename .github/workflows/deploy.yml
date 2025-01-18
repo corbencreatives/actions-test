@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
 
       - name: Push chart to registry
-        run: helm push ./go-merkle-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
+        run: helm push ./actions-test-0.1.0.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
 
       - name: Install kubectl
 #        id: install_kubectl
@@ -54,5 +54,5 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/go-merkle --version 0.1.0 --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --kube-context cicdcluster --namespace cicd --create-namespace --insecure-skip-tls-verify
 
