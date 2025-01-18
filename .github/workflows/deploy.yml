@@ -12,6 +12,10 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+#      contents: read
+#      pages: write
+      id-token: write
 #    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Install helm
