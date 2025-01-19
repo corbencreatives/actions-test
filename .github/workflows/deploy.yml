@@ -51,5 +51,5 @@ jobs:
 
       - name: Deploy to k8s
         run: |
-          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/charts/actions-test --version 0.1.0 --namespace cicd --create-namespace --insecure-skip-tls-verify
+          helm upgrade --install actions-test oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/actions-test --version 0.1.0 --namespace cicd --create-namespace --insecure-skip-tls-verify
 
