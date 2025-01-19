@@ -45,8 +45,8 @@ jobs:
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
-      # Configure kubectl for AKS
-      - name: Set up kubectl for AKS
+      # Get the kube config for AKS
+      - name: Get kube config for AKS
         run: |
           az aks get-credentials --resource-group rg-cicd-apps --name cicdcluster
 
